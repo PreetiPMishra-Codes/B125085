@@ -4,8 +4,9 @@
 using namespace std;
 
 class Fraction {
-    int n, d;
+    int n, d;  // Numerator and denominator
 
+    // Find the greatest common divisor using the Euclidean algorithm
     int gcd(int a, int b) {
         a = abs(a);
         b = abs(b);
@@ -18,11 +19,13 @@ class Fraction {
         return a;
     }
 
+    // Reduce the fraction to its simplest form
     void simplify() {
         int g = gcd(n, d);
         n /= g;
         d /= g;
 
+        // Keep the denominator positive
         if (d < 0) {
             n = -n;
             d = -d;
@@ -30,6 +33,7 @@ class Fraction {
     }
 
 public:
+    // Constructor initializes and simplifies a fraction
     Fraction(int a = 0, int b = 1) : n(a), d(b) {
         if (d == 0) {
             n = 0;
@@ -38,14 +42,17 @@ public:
         simplify();
     }
 
+    // Overload + to add two fractions
     Fraction operator+(Fraction f) {
         return Fraction(n * f.d + f.n * d, d * f.d);
     }
 
+    // Overload - to subtract two fractions
     Fraction operator-(Fraction f) {
         return Fraction(n * f.d - f.n * d, d * f.d);
     }
 
+    // Display the fraction
     void display() {
         cout << n << "/" << d << endl;
     }
@@ -60,6 +67,7 @@ int main() {
     cout << "Enter second fraction (numerator denominator): ";
     cin >> c >> d;
 
+    // Reject fractions with a zero denominator
     if (b == 0 || d == 0) {
         cout << "Invalid denominator!\n";
         return 0;
